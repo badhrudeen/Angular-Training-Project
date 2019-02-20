@@ -1,0 +1,10 @@
+<h4>
+  <input type="radio" name="t1" [(ngModel)]="selectedRadioButton" value="all" (change)="OnRadioButtonChanged()">
+  <span>All({{all}})</span> | 
+
+  <input type="radio" name="t1" [(ngModel)]="selectedRadioButton" value="Male" (change)="OnRadioButtonChanged()">
+  <span>Male({{male}})</span> | 
+
+  <input type="radio" name="t1" [(ngModel)]="selectedRadioButton" value="Female" (change)="OnRadioButtonChanged()">
+  <span>Female({{female}})</span>
+</h4>

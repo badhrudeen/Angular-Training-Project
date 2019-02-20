@@ -1,0 +1,28 @@
+<div class="container">
+  <h1>Reactive Form</h1>
+
+  <form [formGroup]="rForm" (ngSubmit)="addPost(rForm.value)">
+  
+    <div class="form-group">
+      <label for="">Name</label>
+      <input type="text" class="form-control" formControlName="name"
+      [class.is-invalid]="rForm.get('name').invalid && rForm.get('name').touched">
+      <small class="text-danger" 
+      [class.d-none]="rForm.get('name').valid || rForm.get('name').untouched">
+      Please enter name</small>
+    </div>
+
+    <div class="form-group">
+      <label for="">description</label>
+      <input type="text" class="form-control" formControlName="description"
+      [class.is-invalid]="rForm.get('description').invalid && rForm.get('description').touched">
+      <div *ngIf="rForm.get('description').invalid && rForm.get('description').touched">
+        <small class="text-danger" *ngIf="rForm.get('description').errors?.required">Description is required</small>
+        <small class="text-danger" *ngIf="rForm.get('description').errors?.minlength">Description must be at least 30 characters</small>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  
+
+</form>

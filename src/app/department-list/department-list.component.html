@@ -1,0 +1,6 @@
+<h2>Department List</h2>
+<ul>
+  <li (click)="onDepartmentClicked(department)" *ngFor="let department of departments" >
+    <span>{{ department.id }} - {{ department.name }}</span>
+  </li>
+</ul>

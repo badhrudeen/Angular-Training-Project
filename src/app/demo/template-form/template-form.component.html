@@ -1,0 +1,63 @@
+<div class="container">
+  <h1>Template Driven Form</h1>
+  <form #userForm="ngForm" (ngSubmit)="OnSubmit(userForm)">
+
+    {{ userForm.form.valid }}
+
+    <div class="form-group">
+      <label for="">Name</label>
+      <input type="text" #name="ngModel" [class.is-invalid]="name.invalid && name.touched" class="form-control"
+       name="userName" [(ngModel)]="userModel.name" required>
+       <small class="text-danger" [class.d-none]="name.valid || name.untouched">Name is required</small>
+    </div>  
+
+    
+    <div class="form-group">
+      <label for="">Email</label>
+      <input type="text" class="form-control" name="email"  [(ngModel)]="userModel.email">
+    </div>
+
+    <div class="form-group">
+      <label for="">Phone</label>
+      <input maxlength="10" type="tel" #phone="ngModel" pattern="^\d{10}$" [class.is-invalid]="phone.invalid && phone.touched" class="form-control" name="phone"  
+      [(ngModel)]="userModel.phone" required>
+      <div *ngIf="phone.errors && (phone.invalid || phone.touched)">
+        <small class="text-danger" *ngIf="phone.errors.required">Phone number is required</small>
+        <small class="text-danger" *ngIf="phone.errors.pattern">Phone number must be 10 digit</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <select class="custom-select" (change)="validateTopic(topic.value)" (blur)="validateTopic(topic.value)"
+      [(ngModel)]="userModel.topic" name="topic" #topic="ngModel"
+      [class.invalid]="topicHasError && topic.touched" required>
+        <option value="default" selected>--Please Select Topic--</option>
+        <option *ngFor="let topic of topics">{{ topic }}</option>
+      </select>
+      <small class="text-danger" [class.d-none]="!topicHasError || topic.untouched">Please choose a topic</small>
+    </div>
+
+    <div class="form-group">
+      <label>Time</label>
+      <div class="form-check">
+        <input type="radio" name="time"  class="form-check-input" value="morning" [(ngModel)]="userModel.time">
+        <label for="">Morning</label>
+      </div>
+      <div class="form-check">
+          <input type="radio" name="time"  class="form-check-input" value="evening" [(ngModel)]="userModel.time">
+          <label for="">Evening</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+      <input type="checkbox"  class="form-check-input" name="subscribe"  [(ngModel)]="userModel.subscribe">
+      <label class="form-check-label">
+        Subscribe
+      </label>
+    </div>
+
+    <button [disabled]="userForm.form.invalid" class="btn btn-primary" type="submit">Submit Form</button>
+    
+
+  </form>
+</div>
